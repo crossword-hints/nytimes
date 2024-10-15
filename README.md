@@ -1,14 +1,14 @@
 
 # 🧩 NYT Crossword Hints & Solutions
 
-Welcome to [NYT Crosswords Hints & Solutions](https://crosswordhints.blogspot.com/)! 🧠 Whether you’re looking for **clue hints**, **solutions**, or **puzzle strategies** for the **Friday, October 11, 2024** New York Times Crossword, you’re in the right place.
+Welcome to [NYT Crosswords Hints & Solutions](https://crosswordhints.blogspot.com/)! 🧠 Whether you’re looking for **clue hints**, **solutions**, or **puzzle strategies** for the **New York Times Crossword**, you’re in the right place.
 
 ## 🔍 NYT Crossword Solutions
 
 Stuck on today’s puzzle? We offer:
 
 - 💡 **Hints for Difficult Clues**: Get helpful hints without spoiling the entire puzzle.
-- 📝 **Full Puzzle Solutions**: Can’t crack it? Access complete solutions for the **October 11, 2024 crossword**.
+- 📝 **Full Puzzle Solutions**: Can’t crack it? Access complete solutions for the **NYTimes crossword**.
 - 📊 **Step-by-Step Breakdown**: Detailed explanations for the trickiest answers.
 - 🚀 **Puzzle-Solving Tips**: Learn advanced strategies to improve your crossword skills.
 
