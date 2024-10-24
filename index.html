@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYT Crossword Puzzle - October 17, 2024</title>
+    <!-- SEO Tags -->
+    <meta name="description" content="NYT Crossword Puzzle for October 17, 2024, with grid, clues, and answers.">
+    <meta name="keywords" content="NYT Crossword, Crossword Puzzle, NY Times, October 17 2024, Crossword grid, Clues, Answers">
+    <meta name="author" content="Your Name">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom Styles -->
+    <style>
+        /* Styles for the grid and chart */
+        .crossword-grid {
+            display: grid;
+            grid-template-columns: repeat(15, 30px);
+            grid-template-rows: repeat(15, 30px);
+            gap: 1px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .grid-cell {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 30px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .cell-filled {
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #000000;
+        }
+        .cell-empty {
+            background-color: #000000;
+        }
+        .grid-number {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 10px;
+            margin: 1px;
+        }
+        .grid-cell.position-relative {
+            position: relative;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .clue-answer {
+            margin-bottom: 15px;
+        }
+        .clue-number {
+            font-weight: bold;
+        }
+        .clue-text {
+            margin-left: 5px;
+        }
+        .answer-text {
+            margin-left: 5px;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="bg-primary text-white text-center py-4">
+        <h1>NYT Crossword Puzzle - October 17, 2024</h1>
+        <p class="lead">Your Daily Crossword Grid, Clues, and Answers</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <!-- Crossword Puzzle Info -->
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 id="puzzle-title">Loading Puzzle...</h2>
+                <p><strong>Author:</strong> <span id="puzzle-author">Loading...</span></p>
+                <p><strong>Editor:</strong> <span id="puzzle-editor">Loading...</span></p>
+                <p><strong>Published on:</strong> <span id="puzzle-date">Loading...</span></p>
+            </div>
+            <div class="col-lg-4">
+                <h3>Quick Navigation</h3>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#grid">Crossword Grid</a></li>
+                    <li class="list-group-item"><a href="#clues">Clues and Answers</a></li>
+                    <li class="list-group-item"><a href="#chart">Character Frequency Chart</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Crossword Grid -->
+        <section id="grid" class="mt-5">
+            <h2>Crossword Grid</h2>
+            <div class="crossword-grid" id="crossword-grid">
+                <!-- Grid cells will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Clues and Answers Section -->
+        <section id="clues" class="mt-5">
+            <h2>Clues and Answers</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Across</h3>
+                    <div id="across-clues">
+                        <!-- Across clues and answers will be inserted here -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Down</h3>
+                    <div id="down-clues">
+                        <!-- Down clues and answers will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Character Frequency Chart -->
+        <section id="chart" class="mt-5">
+            <h2>Character Frequency Chart</h2>
+            <div class="chart-container">
+                <canvas id="charFrequencyChart"></canvas>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS (Optional if needed) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript to generate grid, clues, and chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+var url = "https://www.xwordinfo.com/JSON/Data.ashx?date=10/24/2024&format=text";
+            const headers = {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'Accept-Encoding': 'gzip, deflate, br, zstd',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Cache-Control': 'max-age=0',
+        'Cookie': '_ga=GA1.1.675846301.1719231319; wv=10; ASP.NET_SessionId=tzylbxnfhxzeievrddca1atw; _clck=1tcg2hc%7C2%7Cfna%7C0%7C1636; __gads=ID=bda6270eec1322f0:T=1719231318:RT=1720440063:S=ALNI_MZdpa_30tkFaHQ-2AmPZkCQ-SGWeg; __gpi=UID=00000e61e35cdc95:T=1719231318:RT=1720440063:S=ALNI_MY2x1CzQsiiNIAeVd1hYoBAjr1ffw; __eoi=ID=a4188f253c386627:T=1719231318:RT=1720440063:S=AA-AfjYESgfWy0rPYoL83DY95iWG; Verify=stamp=7/8/2024 5:01:34 AM&pages=1; FCNEC=%5B%5B%22AKsRol-ot7pcCXqWhT0uAKVwzqG3O7_8wWJOo3o3ez0s9o2kUWvY6UpMXIRJMhuMiduY4ygftglJ9QiIOcoJjuds1QaeVJamxelMj9EZFSVZhQYscdE7SSs7t5FoGit01kI05E4gQukrFfTbFYK8IECzXvY4nA7vUw%3D%3D%22%5D%5D; _clsk=vf3bxs%7C1720441714719%7C14%7C1%7Cw.clarity.ms%2Fcollect; _ga_4N9YZGECSH=GS1.1.1720441956.5.0.1720441956.60.0.0',
+        'Referer': 'https://www.xwordinfo.com/JSON/',
+        'Sec-Ch-Ua': '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+        'Sec-Ch-Ua-Mobile': '?0',
+        'Sec-Ch-Ua-Platform': '"Windows"',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-User': '?1',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+};
+
+fetch(url, {
+      mode: 'no-cors',
+    method: 'GET',
+    headers: headers
+})
+ .then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+
+            // Replace the placeholder data below with your own data
+            const responseData = {
+                'valid': true,
+                'title': 'New York Times, Thursday, October 17, 2024',
+                'date': '10/17/2024',
+                'author': 'August Lee-Kovach',
+                'editor': 'Joel Fagliano',
+                'size': {'rows': 15, 'cols': 15},
+                'grid': ['C', 'A', 'T', 'S', 'A', 'T', '.', 'B', 'A', 'L', 'M', '.', 'B', 'F', 'F', 'A', 'G', 'A', 'T', 'H', 'A', '.', 'A', 'L', 'U', 'M', '.', 'E', 'L', 'I', 'P', 'E', 'R', 'I', 'O', 'D', 'D', 'R', 'A', 'M', 'A', '.', 'C', 'O', 'N', 'E', 'N', 'T', 'R', 'Y', '.', 'R', 'O', 'M', 'E', '.', 'M', 'O', 'R', 'E', 'R', 'D', 'A', '.', '.', 'R', 'U', 'N', 'O', 'N', 'F', 'U', 'M', 'E', 'S', 'S', 'A', 'N', 'D', 'R', 'A', '.', '.', '.', 'S', 'A', 'T', 'I', 'N', 'S', '.', '.', '.', 'E', 'A', 'R', 'L', 'A', 'P', '.', 'N', 'A', 'N', 'C', 'E', '.', 'T', 'E', 'N', 'S', 'E', 'E', 'X', 'C', 'H', 'A', 'N', 'G', 'E', '.', 'B', 'O', 'A', 'T', 'S', '.', 'D', 'E', 'P', 'A', 'R', 'T', '.', '.', '.', 'A', 'D', 'S', 'A', 'L', 'E', '.', '.', '.', 'L', 'T', 'S', 'U', 'L', 'U', 'T', 'I', 'T', 'L', 'E', 'F', 'I', 'G', 'H', 'T', '.', '.', 'N', 'A', 'P', 'L', 'E', 'A', 'S', '.', 'I', 'N', 'R', 'E', '.', 'F', 'O', 'R', 'G', 'E', 'I', 'F', 'S', '.', 'A', 'L', 'T', 'E', 'R', 'C', 'A', 'T', 'I', 'O', 'N', 'K', 'O', 'I', '.', 'M', 'E', 'E', 'T', '.', 'I', 'S', 'O', 'P', 'O', 'D', 'E', 'R', 'A', '.', 'I', 'S', 'L', 'A', '.', 'A', 'T', 'H', 'E', 'N', 'S'],
+                'gridnums': [1, 2, 3, 4, 5, 6, 0, 7, 8, 9, 10, 0, 11, 12, 13, 14, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 16, 0, 0, 17, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 19, 0, 0, 20, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 22, 0, 0, 0, 23, 0, 0, 0, 0, 24, 0, 0, 0, 0, 25, 0, 0, 0, 0, 26, 0, 0, 27, 28, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 31, 32, 33, 0, 34, 0, 0, 0, 0, 0, 35, 36, 0, 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 41, 0, 0, 0, 42, 0, 0, 43, 44, 45, 46, 0, 0, 0, 0, 0, 47, 48, 49, 0, 0, 0, 50, 0, 0, 51, 0, 0, 0, 0, 52, 0, 0, 0, 0, 53, 54, 0, 0, 0, 55, 0, 0, 0, 56, 0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 58, 0, 0, 0, 59, 0, 0, 0, 0, 60, 0, 0, 0, 0, 0, 61, 0, 0, 0, 62, 0, 0, 0, 0, 63, 0, 0, 0, 0, 0],
+                'clues': {
+                    'across': [
+                        'Placeholder clue 1 across',
+                        'Placeholder clue 2 across',
+                        // Add your own across clues here
+                    ],
+                    'down': [
+                        'Placeholder clue 1 down',
+                        'Placeholder clue 2 down',
+                        // Add your own down clues here
+                    ],
+                },
+                'answers': {
+                    'across': [
+                        'ANSWER1',
+                        'ANSWER2',
+                        // Add your own across answers here
+                    ],
+                    'down': [
+                        'ANSWER1',
+                        'ANSWER2',
+                        // Add your own down answers here
+                    ],
+                },
+            };
+
+            // Function to initialize the page
+            function initPage() {
+                // Set puzzle info
+                document.getElementById('puzzle-title').textContent = responseData.title;
+                document.getElementById('puzzle-author').textContent = responseData.author;
+                document.getElementById('puzzle-editor').textContent = responseData.editor;
+                document.getElementById('puzzle-date').textContent = formatDate(responseData.date);
+
+                // Generate crossword grid
+                generateCrosswordGrid(responseData.grid, responseData.gridnums, responseData.size.rows, responseData.size.cols);
+
+                // Display clues and answers
+                displayCluesAndAnswers(responseData.clues, responseData.answers);
+
+                // Generate character frequency chart
+                generateCharFrequencyChart(responseData.grid);
+            }
+
+            // Function to format date to "Month Day, Year"
+            function formatDate(dateString) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const date = new Date(dateString);
+                return date.toLocaleDateString(undefined, options);
+            }
+
+            // Function to generate the crossword grid
+            function generateCrosswordGrid(grid, gridnums, rows, cols) {
+                const gridContainer = document.getElementById('crossword-grid');
+                gridContainer.innerHTML = ''; // Clear any existing content
+
+                for (let i = 0; i < grid.length; i++) {
+                    const cellValue = grid[i];
+                    const cellNum = gridnums[i];
+
+                    const cellDiv = document.createElement('div');
+                    cellDiv.classList.add('grid-cell');
+
+                    if (cellValue === '.') {
+                        cellDiv.classList.add('cell-empty');
+                    } else {
+                        cellDiv.classList.add('cell-filled', 'position-relative');
+                        cellDiv.textContent = cellValue.toUpperCase();
+
+                        if (cellNum > 0) {
+                            const numDiv = document.createElement('div');
+                            numDiv.classList.add('grid-number');
+                            numDiv.textContent = cellNum;
+                            cellDiv.appendChild(numDiv);
+                        }
+                    }
+
+                    gridContainer.appendChild(cellDiv);
+                }
+            }
+
+            // Function to display clues and answers
+            function displayCluesAndAnswers(clues, answers) {
+                const acrossCluesContainer = document.getElementById('across-clues');
+                const downCluesContainer = document.getElementById('down-clues');
+
+                // Clear any existing content
+                acrossCluesContainer.innerHTML = '';
+                downCluesContainer.innerHTML = '';
+
+                // Display Across Clues and Answers
+                for (let i = 0; i < clues.across.length; i++) {
+                    const clueText = clues.across[i];
+                    const answerText = answers.across[i];
+                    const clueNumber = i + 1; // Adjust as per numbering
+
+                    const clueDiv = document.createElement('div');
+                    clueDiv.classList.add('clue-answer');
+
+                    clueDiv.innerHTML = `
+                        <span class="clue-number">${clueNumber}.</span>
+                        <span class="clue-text">${clueText}</span>
+                        <br>
+                        <span class="answer-text">Answer: ${answerText}</span>
+                    `;
+
+                    acrossCluesContainer.appendChild(clueDiv);
+                }
+
+                // Display Down Clues and Answers
+                for (let i = 0; i < clues.down.length; i++) {
+                    const clueText = clues.down[i];
+                    const answerText = answers.down[i];
+                    const clueNumber = i + 1; // Adjust as per numbering
+
+                    const clueDiv = document.createElement('div');
+                    clueDiv.classList.add('clue-answer');
+
+                    clueDiv.innerHTML = `
+                        <span class="clue-number">${clueNumber}.</span>
+                        <span class="clue-text">${clueText}</span>
+                        <br>
+                        <span class="answer-text">Answer: ${answerText}</span>
+                    `;
+
+                    downCluesContainer.appendChild(clueDiv);
+                }
+            }
+
+            // Function to generate character frequency chart
+            function generateCharFrequencyChart(grid) {
+                const charCounts = {};
+
+                grid.forEach(char => {
+                    if (char !== '.') {
+                        const upperChar = char.toUpperCase();
+                        if (charCounts[upperChar]) {
+                            charCounts[upperChar]++;
+                        } else {
+                            charCounts[upperChar] = 1;
+                        }
+                    }
+                });
+
+                const labels = Object.keys(charCounts).sort();
+                const data = labels.map(label => charCounts[label]);
+
+                const ctx = document.getElementById('charFrequencyChart').getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Character Frequency',
+                            data: data,
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Characters'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Frequency'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Initialize the page
+            initPage();
+        });
+    </script>
+</body>
+</html>
