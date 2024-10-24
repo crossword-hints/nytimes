@@ -169,9 +169,8 @@ fetch(url, {
     method: 'GET',
     headers: headers
 })
- .then(response => console.log(response))
-.then(data => console.log(data))
-.catch(error => console.error('Error:', error));
+ .then(response => console.log(response.text))
+  .catch(error => console.error('Error:', error));
 
             // Replace the placeholder data below with your own data
             const responseData = {
